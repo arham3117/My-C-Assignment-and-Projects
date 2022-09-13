@@ -1,0 +1,130 @@
+
+#include <iostream>
+
+using namespace std;
+
+    class TV
+{ 
+    public:
+        
+        int VolumeLevel;
+        int Channel;
+        bool On;
+        
+        TV()
+        {
+            Channel=1;
+            VolumeLevel=1;
+            On=false;
+        }    
+        
+        
+        void TurnOn();
+        void Turnoff();
+        void GetTV();
+        void SetChannel (int);
+        void GetChannel();
+        void SetVolume (int);
+        void GetVolume();
+        void ChannelUp ();
+        void ChannelDown ();
+        void VolumeUp ();
+        void VolumeDown ();
+        
+};
+    void TV::TurnOn()
+{
+    On = true;
+    
+}
+
+    void TV::Turnoff()
+{    
+    On = false;
+}   
+    void TV::GetTV()
+{ 
+    if(On==true)
+        cout <<"The tv is on " <<endl;
+    else
+        cout << "The tv is off " <<endl;
+}
+    void TV::SetChannel (int Newchannel)
+{
+    Channel = Newchannel;
+    
+}
+    void TV::GetChannel()
+{
+    cout << "The channel is: " << Channel << endl;
+}    
+    void TV::ChannelUp()
+{
+    Channel++;
+
+}    
+    void TV::ChannelDown()
+{
+    Channel--;
+}    
+    void TV::SetVolume (int NewVolume)
+{
+    VolumeLevel = NewVolume;
+
+}    
+    void TV::GetVolume()
+{
+    cout <<"The volume is: " << VolumeLevel << endl;
+}    
+    
+    void TV::VolumeUp()
+{
+    VolumeLevel++;
+    
+}   
+    void TV::VolumeDown()
+{
+    VolumeLevel--;
+    
+}   
+
+    
+
+    int main()
+{
+    TV tv1;
+    TV tv2;
+    int x,y;
+    tv1.TurnOn();
+    tv2.TurnOn();
+    tv1.GetTV();
+    
+    cout << "Enter the channel number you would like to watch:";
+    cin  >> x;
+    
+    cout << "Enter the volume level you would like to hear:";
+    cin  >> y;
+    
+    tv1.SetChannel(x);
+    tv1.GetChannel();
+    tv1.ChannelUp();
+    tv1.GetChannel();
+    tv1.ChannelDown();
+    tv1.GetChannel();
+    tv2.SetVolume(y);
+    tv2.GetVolume();
+    tv2.VolumeUp();
+    tv2.GetVolume();
+    tv2.VolumeDown();
+    tv2.GetVolume();
+    tv1.Turnoff();
+    tv2.Turnoff();
+    tv1.GetTV();
+    tv2.GetTV();
+    
+
+    return 0;
+}
+
+
+
