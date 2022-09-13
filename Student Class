@@ -1,0 +1,101 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// declaring class student
+class student{
+    int id;
+    string fname; 
+    string lname;
+    int score[4];
+    public:
+     student ()
+     {
+     }
+   
+     student(int id1 , string fname1 , string lname1 , int a[4] )
+     {
+         id = id1;
+         fname = fname1;
+         lname = lname1;
+         for(int i=0;i<4;i++)
+         {
+             score[i] = a[i];
+         }
+     }
+     int getid()
+     {
+         return id;
+     }
+     string getfname()
+     {
+         return fname;
+     }
+     string getlname()
+     {
+         return lname;
+     }
+     int * getscore(){
+         return score;
+     }
+     void inputinfo(int id1 , string fname1 , string lname1 , int a[4] )
+     {
+         id = id1;
+         fname = fname1;
+         lname = lname1;
+         for(int i=0;i<4;i++)
+         {
+             score[i] = a[i];
+         }
+     }
+     double computeAverageScore()
+     {
+   
+        double sum = 0;
+        for(int i=0;i<4;i++)
+        {
+            sum+=score[i];
+        }
+        return sum/4;
+     }
+     void printinfo()
+     {
+        cout<<id<<"\t"<<fname<<" "<<lname<<"\t"<<score[0]<<" "<<score[1]<<" "<<score[2]<<" "<<score[3]<<"\t"<<computeAverageScore()<<endl;
+     }
+};
+int main()
+{
+    int n ;
+    cout<<"Enter number of students : ";
+    cin>>n;
+    student arr[n];
+    for(int i =0;i<n;i++)
+    {
+        int id;
+        string fname , lname;
+        int score[4];
+        cout<<"Enter student id : ";
+        cin>>id;
+        cout<<"Enter the student first name : ";
+        cin>>fname;
+        cout<<"Enter the student last name : ";
+        cin>>lname;
+        cout<<"Enter score 1 of 4 : ";
+        cin>>score[0];
+        cout<<"Enter score 2 of 4 : ";
+        cin>>score[1];
+        cout<<"Enter score 3 of 4 : ";
+        cin>>score[2];
+        cout<<"Enter score 4 of 4 : ";
+        cin>>score[3];
+      
+        arr[i] = student(id,fname,lname,score);
+    }
+    cout<<"Student details : "<<endl;
+    cout<<"ID" <<"\t"<<"Name"<<"\t\t"<<"Marks"<<"\t\t"<<"Average " <<endl;
+    for(int i =0;i<n;i++)
+    {
+        arr[i].printinfo();
+    }
+  return 0;
+}
