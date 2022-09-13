@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int amount,leftover,dollars,quarters,dimes,nickels,pennies;
+    
+    cout<<"Enter the amount in pennies" <<endl;
+    cin >> amount;
+    
+    dollars= amount/100;
+    leftover=amount-dollars*100;
+    cout<<"The amount in dollars is "<< dollars << "and the leftover is "<< leftover <<endl;
+    
+    quarters = leftover/25;
+    leftover= amount-dollars*100-quarters*25;
+    cout<< "The amount in quarters is "<<quarters <<"and the leftover is" << leftover <<endl;
+    
+    dimes = leftover/10;
+    leftover =amount-dollars*100-quarters*25-dimes*10;
+    
+    cout<<"The amount in dimes is "<<dimes<<"and the leftover is " <<leftover <<endl;
+    
+    nickels =leftover/5;
+    leftover =amount-dollars*100-quarters*25-dimes*10-nickels*5;
+    cout<<"The amount in nickels is "<<nickels<<"and the leftover is " <<leftover <<endl;
+    
+    pennies = leftover/1;
+    leftover=amount-dollars*100-quarters*25-dimes*10-nickels*5-pennies*1;
+    cout<<"The amount in pennies is "<<pennies<<"and the leftover is " << leftover <<endl;
+    
+    
+
+    return 0;
+}
