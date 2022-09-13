@@ -1,0 +1,112 @@
+# include <iostream>
+#include <string>
+
+using namespace std;
+
+// declaring function prototypes
+
+string letter_grade(float);
+float maximum (float [],int);
+float minimum (float [],int);
+float average (float [],int);
+
+
+int main()
+
+{
+    float marks[100];
+    
+    int size;
+    
+    cout<< "Enter the size of the array" << endl;
+    cin>> size;
+    
+    for (int i=0; i<size; i++)
+    { 
+        cout << "Enter the marks: ";  
+        cin >> marks[i];
+    }
+
+for (int i=0; i< size; i++)
+    
+    cout << "The letter grade for mark " << marks[i] << " is " << letter_grade(marks[i]) << endl;
+    
+    cout<<"The maximum mark is: " << maximum(marks,size) << endl;
+    
+    cout << "The minimum mark is: " << minimum(marks,size)<<endl;
+    
+    cout << "The average mark is: " << average(marks,size) << endl;
+system ("pause");
+return 0;
+}
+
+string letter_grade (float m)
+{
+    if ((m>=90)&&(m<=100))
+    return "A";
+    
+    else if ((m>=86)&&(m<=89))
+    return "A-";
+    
+    else if ((m>=80)&&(m<=85))
+    return "B+";
+    
+    else if ((m>=75)&&(m<=79))
+    return "B";
+    
+    if ((m>=70)&&(m<=74))
+    return "B-";
+    
+    else if ((m>=67)&&(m<=69))
+    return "C+";
+    
+    else if ((m>=63)&&(m<=66))
+    return "C";
+    
+    else if ((m>=60)&&(m<=62))
+    return "C-";
+    
+    else if ((m>=0)&&(m<=59))
+    return "F";
+    
+    else 
+    return "X";
+}
+
+float maximum (float a[],int size)
+
+{
+    int max = a[0];
+    for (int i=1; i< size; i++)
+    
+    if ( a[i] > max )
+    max=a[i];
+    
+    return max;
+}
+
+float minimum (float a[], int size)
+
+{
+    int min = a[0];
+    for (int i=1; i< size; i++ )
+    
+    if (a[i] < min)
+    min = a[i];
+    
+    return min;
+}
+
+float average (float a[0], int size)
+{
+    int sum = a[0];
+    
+    for (int i=1; i< size; i++)
+    
+    sum = sum + a[i];
+    
+    return (sum/ (float) size);
+}
+
+
+
