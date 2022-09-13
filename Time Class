@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;  
+
+// making class time
+class time
+{
+private:  // putting min and hours in private 
+int min;
+int hour;
+public: // making public
+void setTime(int min_,int hour_)
+{
+min=min_;
+hour=hour_;
+}
+int getMin()
+{
+return min;
+}
+int getHour()
+{
+return hour;
+}
+void showTime()
+{
+cout<<"\n"<<min<<":"<<hour<<endl;
+}
+time sum(time obj)
+{
+time t3;
+int min_=(min+obj.getMin())%60;
+int hour_=((hour+obj.getHour())+((min+obj.getMin())/60))%24;
+t3.setTime(min_,hour_);
+return t3;
+}
+};
+
+int main()
+{
+
+class time t1;
+class time t2;
+class time t3;
+cout<<"\nMM:HH\n";
+t1.setTime(59,18); // setting time
+t2.setTime(12,9); // setting time
+t3=t1.sum(t2);
+t1.showTime(); // displaying time
+t2.showTime();// displaying time
+t3.showTime();// displaying time
+return 0;
+}
