@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int Dollars,FStamps,PennyStamps;
+    cout <<"Welcome to Stamp Machine" << endl;
+    cout <<"First class stamps costs 44 pennnies" << endl;
+    cout <<"Enter the amount in dollars" << endl;
+    cin  >> Dollars;
+    
+    FStamps     = 100 * Dollars / 44;
+    PennyStamps = 100 * Dollars % 44;
+    
+    cout <<"Amount invested in dollars inorder to purchase First class stamps and Penny Stamps is :$ " << Dollars << endl;
+    cout <<"Number of First class Stamps purchsed is :  " << FStamps << endl;
+    cout <<"Number of Penny Stamps purchased is :  " << PennyStamps << endl;
+    
+    cout << "Thanks for using Stamp Machine";
+
+   return 0;
+}
