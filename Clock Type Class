@@ -1,0 +1,75 @@
+#include <iostream>
+
+using namespace std;
+    
+    
+    class ClockType
+{
+    private:
+    
+        int Hours;
+        int Minutes;
+        int Seconds;
+    
+    public:
+        
+        void SetTime(int hr, int min, int sec);
+        void GetTime(int & hr, int & min , int & sec );
+        void PrintTime();
+        void IncrementHours();
+        void IncrementMinutes();
+        void IncrementSecond();
+        
+};
+
+    void ClockType::SetTime(int  hr, int  min, int  sec)
+{   
+        Hours=hr;
+        Minutes=min;
+        Seconds=sec;
+}        
+    void ClockType::GetTime(int & hr, int & min, int & sec)
+{
+        hr=Hours;
+        min=Minutes;
+        sec=Seconds;
+}
+
+    void ClockType::IncrementHours()
+{
+        Hours++;
+    
+}
+    void ClockType::IncrementMinutes()
+{    
+        Minutes++;
+}  
+    void ClockType::IncrementSecond()
+{   
+        Seconds++;
+}
+    void ClockType::PrintTime()
+{
+        cout << "Number of hours:" << Hours <<endl;
+        cout << "Number of minutes:" << Minutes <<endl;
+        cout << "Number of seconds:" << Seconds <<endl;
+}        
+    
+    
+int main()
+{
+    ClockType A;
+    
+    A.SetTime(2,3,4);
+    A.IncrementHours();
+    A.IncrementMinutes();
+    A.IncrementSecond();
+    A.PrintTime();
+    
+    
+
+    return 0;
+}
+
+
+
