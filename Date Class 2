@@ -1,0 +1,105 @@
+// Name: Muhamamd Arham
+// CSCI 201
+
+
+
+#include <iostream>
+using namespace std;
+class myDate
+{
+    private:
+    int month;
+    int day;
+    int year;
+
+    public:
+    void setDate(int, int, int);
+    myDate();
+    myDate(int, int, int);
+    void setMonth(int);
+    void setDay(int);
+    void setYear(int);
+    void displayDate();
+};
+
+int main()
+{
+    myDate d1,d2(3, 17, 2021);
+    d1.displayDate();
+    d2.displayDate();
+    d1.setDate(4,4,2004);
+    d2.setMonth(5);
+    d1.displayDate();
+    d2.displayDate();
+    return 0;
+}
+
+void myDate::setDate(int m, int d, int y)
+{
+    month=m;
+    day=d;
+    year=y;
+}
+myDate::myDate()
+{
+    setDate(1,1,2000);
+}
+myDate::myDate(int m1, int d1, int y1)
+{
+    setDate(m1, d1, y1);
+}
+void myDate::setMonth(int m)
+{
+    month=m;
+}
+void myDate::setDay(int d)
+{
+    day=d;
+}
+void myDate::setYear(int y)
+{
+    year=y;
+}
+void myDate::displayDate()
+{
+    switch(month)
+    {
+        case 1:
+        cout<<"Jan.";
+        break;
+        case 2:
+        cout<<"Feb.";
+        break;
+        case 3:
+        cout<<"Mar.";
+        break;
+        case 4:
+        cout<<"Apr.";
+        break;
+        case 5:
+        cout<<"May.";
+        break;
+        case 6:
+        cout<<"June.";
+        break;
+        case 7:
+        cout<<"July.";
+        break;
+        case 8:
+        cout<<"Aug.";
+        break;
+        case 9:
+        cout<<"Sept.";
+        break;
+        case 10:
+        cout<<"Oct.";
+        break;
+        case 11:
+        cout<<"Nov.";
+        break;
+        case 12:
+        cout<<"Dec.";
+        break;
+    }
+    cout<<day<<","<<year<<endl;
+}
