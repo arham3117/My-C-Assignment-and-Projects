@@ -1,0 +1,184 @@
+#include <iostream>
+using namespace std;
+
+
+// Class
+class poly{
+private:
+  struct node{
+    float coef;
+    int exp;
+    struct node *next;
+  } * start;
+public:
+
+
+  poly(){
+    start = NULL;
+  }
+  void insert(float c, int e){
+    node* temp = start;
+    if(temp == NULL){
+      temp = new node;
+      start = temp;
+    }else {
+      while(temp->next != NULL)
+        temp = temp->next;
+      temp->next = new node;
+      temp = temp->next;
+    }
+    temp->coef = c;
+    temp->exp = e;
+    temp->next = NULL;
+  }
+
+  void show(){
+    node* temp = start;
+    int f = 0;
+    cout << endl; 
+    while (temp != NULL) { if (f != 0) { if (temp->coef > 0)
+            cout << " + ";
+          else
+            cout << " "; } if (temp->exp != 0)
+            cout << temp->coef << "x^" << temp->exp;
+        else
+          cout << temp->coef;
+      temp = temp->next;
+      f = 1;
+    }
+  }
+
+  void add(poly& n1, poly& n2){
+    struct node* z;
+    if(n1.start == NULL && n2.start == NULL){
+      return;
+    }
+    struct node *temp1, *temp2;
+    temp1 = n1.start;
+    temp2 = n2.start;
+    while(temp1 != NULL && temp2 != NULL){
+      if(start == NULL){
+        start = new node;
+        z = start;
+      }else {
+        z->next = new node;
+        z = z->next;
+      }
+      if(temp1->exp < temp2->exp){
+        z->coef = temp2->coef;
+        z->exp = temp2->exp;
+        temp2 = temp2->next;
+      }else {
+        if(temp1->exp == temp2->exp){
+          z->coef = temp1->coef + temp2->coef;
+          z->exp = temp1->exp;
+          temp1 = temp1->next;
+          temp2 = temp2->next;
+        }
+      }
+    }
+    while(temp1 != NULL){
+      if(start == NULL){
+        start = new node;
+        z = start;
+      }else {
+        z->next = new node;
+        z = z->next;
+      }
+      z->coef = temp1->coef;
+      z->exp = temp1->exp;
+      temp1 = temp1->next;
+    }
+    while(temp2 != NULL){
+      if(start == NULL){
+        start = new node;
+        z = start;
+      }else {
+        z->next = new node;
+        z = z->next;
+      }
+      z->coef = temp2->coef;
+      z->exp = temp2->exp;
+      temp2 = temp2->next;
+    }
+    z->next = NULL;
+  }
+};
+
+int main(){
+    
+    cout<<"This program responds to commands the user enters to";
+    cout<<"manipulate 3 polynomial functions. The functions are all initially 0.0.";
+    cout<<"In the following commands, v is a double value, and n, n1, n2, and n3 indicate polynomials; they may only be integers from 0 to 2."<<endl;
+    cout<<"r n -- Read in the terms of polynomial n."<<endl;
+    cout<<"i n -- Reinitialize polynomial n to 0."<<endl;
+    cout<<"c n1 n2 -- Assign polynomial n1 to polynomial n2."<<endl;
+    cout<<"g n -- Report the degree of polynomial n."<<endl;
+    cout<<"a n1 n2 n3 -- Add polynomials n1 and n2 and put their sum in polynomial n3."<<endl;
+    cout<<"m v n1 n2 -- (polynomial n2) <- v * (polynomial n1)"<<endl;
+    cout<<"p n1 v n2 -- (polynomial n2) <- (polynomial n1) * v"<<endl;
+    cout<<"d n1 n2 -- Put the derivative of polynomial n1 in polynomial n2."<<endl;
+    cout<<"w n -- Write out polynomial n."<<endl;
+    cout<<"h -- this menu."<<endl;
+    cout<<"q -- Quit."<<endl;
+    
+    char command;
+	cin >> command;
+	switch( command )
+	   {
+
+	       case 'r' : {Read the terms();
+
+	                  break;
+	               }
+	       case 'w' : {PrintList();
+	                    break;}
+
+            case 'i' :{ReInitialize();
+
+	                break;}
+	                
+	        case 'c': {Assign();
+	                break;}
+
+            case 'g': {degree(struct node *first);
+                    break;
+                    }
+            
+            case 'a':{Add();
+	                break;}
+	                
+	        case 'm': {(Node** current, int n)
+
+            case 'p': {(Node** current, int n)
+
+                break;
+            }
+
+            case 'h': {menu();
+            break;
+            }
+
+            case 'd': {derivative();
+
+	}while(command != 'q');
+
+	return 0;
+}
+
+void Insert(){
+ double coefficent;
+ int exponent;
+	           cout<<"Please enter value: ";
+	           cin >> coefficent >> exponent;
+	                AddNode(exponent,coefficent);
+	           cout << "The value Entered.\n";
+}
+
+void ReInitialize(){
+
+        make_empty();
+
+}
+  
+}
