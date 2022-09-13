@@ -1,0 +1,57 @@
+# include <iostream>
+# include <string>
+
+using namespace std;
+
+struct product
+{
+        string pname;
+        char pmodel[5];
+        float pprice;
+};
+
+void print_product(product[],int);
+
+int main()
+{
+    product p[10];
+    int n=0;
+    string x;
+    
+    for(int i=0; i<10;i++)
+{
+    cout<<"Enter product name: ";
+    cin>>x;
+    
+    if (x=="quit")
+    break;
+    
+    p[i].pname=x;
+    
+    cout<< "Enter product model number: ";
+    cin>>p[i].pmodel;
+    
+    cout<<"ENter product price: ";
+    cin>> p[i].pprice;
+    
+    n++;
+}
+
+print_product(p,n);
+
+
+
+return 0;
+}
+
+
+
+void print_product(product pr[],int size)
+{
+    for (int i=0;i<size;i++)
+    {   
+        cout<< pr[i].pname<<"  ";
+        cout<< pr[i].pmodel<<"  ";
+        cout<< pr[i].pprice<< endl;
+    }
+}    
