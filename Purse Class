@@ -1,0 +1,78 @@
+
+#include <iostream>
+using namespace std;
+
+
+class Purse
+{
+    private:
+      int Purse_id, capacity, contents;
+    
+    public:
+      void init_Purse(int, int, int);
+      int Get_number();
+      int Get_capacity();
+      int Insert_Money(int);
+      int Remove_Money(int);
+};
+
+int main()
+{
+     int  id, cap, ct;
+     int n, p, q;
+     
+     id  = 1234;
+     cap =1000;
+     
+     cout << "Enter the content in the purse : $" <<endl;
+     cin >> ct;
+     
+     Purse purse1;
+     purse1.init_Purse(id, cap, ct);
+     
+     cout << "Purse ID "  <<purse1.Get_number() <<endl;
+     cout << "Maximum capacity of the purse: $" << purse1.Get_capacity() <<endl;
+     
+     cout << "Current content in the purse: $" <<ct <<endl;
+     
+     cout << "Enter the dollar amount you want to add in the purse: $";
+     cin  >> n;
+     cout << "After adding $" << n <<", the purse contains: $" <<purse1.Insert_Money(n) <<endl;
+     
+     
+     cout << "Enter the dollar amount you want to remove from the purse: $" << endl;
+     cin  >> p;
+     cout <<"After removing $" << p << ", the purse contains: $" << purse1.Remove_Money(p) << endl;
+     
+     return 0;
+}    
+
+void Purse::init_Purse(int x,int y, int z)
+{
+    Purse_id = x;
+    capacity = y;
+    contents = z;
+}
+
+int Purse::Get_number()
+{
+    return Purse_id;
+    
+}
+
+int Purse::Get_capacity ()
+{
+    return capacity;
+}
+
+int Purse::Insert_Money(int q)
+{
+    contents = contents + q;
+    
+    return contents;
+}
+int Purse::Remove_Money(int q)
+{
+    contents = contents - q;
+    return contents;
+}
