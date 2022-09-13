@@ -1,0 +1,109 @@
+#include <iostream>
+
+using namespace std;
+
+//Creating Rectangle class
+class Rectangle
+{
+   private :
+       //Declaring variables
+       float length;
+       float width;
+   public:
+      
+       Rectangle();
+       Rectangle(float length, float width);
+      
+       //Function declarations
+   void setLength(float length);
+       void setWidth(float width);
+       float perimeter();
+       float area();
+       void show();
+       int sameArea(Rectangle);
+};
+// cosntructor
+       Rectangle::Rectangle()
+       {
+          
+       }
+      
+       
+       Rectangle::Rectangle(float length, float width)
+       {
+           this->length=length;
+           this->width=width;
+       }
+      
+      
+   void Rectangle::setLength(float length)
+   {
+      this->length=length;
+       }
+         
+       void Rectangle::setWidth(float width)
+       {
+          this->width=width;
+       }
+         
+       float Rectangle::perimeter()
+       {
+          return 2*(this->length+this->width);
+       }
+       float Rectangle::area()
+       {
+          return (this->length*this->width);
+       }
+       void Rectangle::show()
+       {
+          cout<<"Length = "<<this->length<<" Width = "<<this->width<<endl;
+       }
+       int Rectangle::sameArea(Rectangle r)
+       {
+          if(this->area()==r.area())
+          return 1;
+          else
+          return 0;
+       }
+         
+int main()
+{
+   //Declaring variables
+   float length,width;
+  
+   //Creating an obejct to Rectangle r1
+Rectangle r1(15,6);
+
+    //Creating an obejct to Rectangle r2
+Rectangle r2;
+
+cout<<"Enter the Length of the Rectangle :";
+cin>>length;
+cout<<"Enter the Width of the Rectangle :";
+cin>>width;
+
+//Setting the length and width of the rectangle r2
+r2.setLength(length);
+r2.setWidth(width);
+cout<<"Rectangle r1 :";
+r1.show();
+cout<<"Rectangle r2 :";
+r2.show();
+/* calling the function to compare
+* the area of rectangle r1 and r2
+*/
+int res=r1.sameArea(r2);
+if(res)
+cout<<"The Rectangle r1 and Rectangle r2 having same area ."<<endl;
+else
+cout<<"The Rectangle r1 and Rectangle r2 not having same area ."<<endl;
+
+///Displaying the area and perimeter of rectangle r1 and r2
+cout<<"Area of the Rectangle r1:"<<r1.area()<<endl;
+cout<<"Area of the Rectangle r2:"<<r2.area()<<endl;
+cout<<"Perimeter of the Rectangle r1:"<<r1.perimeter()<<endl;
+cout<<"Perimeter of the Rectangle r2:"<<r2.perimeter()<<endl;
+  
+return 0;
+}
+
