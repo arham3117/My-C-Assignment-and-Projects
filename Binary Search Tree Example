@@ -1,0 +1,290 @@
+#include<iostream>
+using namespace std;
+class BST
+{
+    public:
+        typedef int item;
+        BST(){root = NULL;}                                     // Default Constructor
+        BST(const BST& source );                                // Copy Constructor
+        ~BST();                                                 // Destructor
+        void reinitialize();                                    // A function that empty the ordered list
+        void insert (item entry);                               // Insert element into list
+        void remove (item target);                              // Remove element from list
+        int length();                                           // Compute length of list
+        bool present(item target);                              // Check if a specific element is present in list
+        friend ostream& operator << (ostream& out_s,BST &t );   // Overload output operator to print list
+    private:
+        struct Node
+        {
+          item data;                                            // Data field
+          Node *left;                                           // Left pointer field
+          Node *right;                                          // Right pointer field
+        };
+        Node *root;                                             // Root of tree
+        // Helper Function to do recursion of the public functions
+        Node* copy ( Node *t );                                 // Copy Constructor helper    
+        void destroy ( Node *root );                            // Destructor helper                    
+        void help_insert ( Node* &t,item entry);                // Insert element into list helper
+        void help_remove ( Node* &t, item target );             // Remove element from list helper-1
+        void remove_node ( Node* &t );                          // Remove element from list helper-2
+        void help_print ( ostream& out_s, Node *t );            // Printing list content helper
+        int find_length(Node *r);                               // Compute length of list helper
+};
+// A copy constructor 
+// Precondition: A binary search tree object
+// Postcondition: Root of binary tree points to the new tree copied from
+BST::BST(const BST& source)
+{
+    root=copy(source.root);
+}
+// A copy constructor helper function that does the copying from source binary search tree
+// Precondition: A source binary search tree root
+// Postcondition: Address of first element of the source binary search tree is returned
+BST:: Node* BST::copy(Node *r)
+{
+    Node* temp;
+    if(r==NULL)                                 // if leaf reached then return NULL
+        return NULL;
+    else 
+    {
+        temp=new Node;                         // Allocate a new node
+        temp->data=r->data;                    // Insert data in new node
+        temp->left=copy(r->left);              // left pointer of node computed recursively
+        temp->right=copy(r->right);            // Right pointer of node computed recursively
+        return temp;                           // Return address of node
+    }
+}
+// A destructor constructor 
+// Precondition: A binary search tree object
+// Postcondition: A helper function is called to recursively delete nodes of the binary search tree
+BST::~BST()
+{
+    destroy(root);
+}
+// A destructor constructor helper function that deletes nodes of a tree recursively 
+// Precondition: A binary search tree root
+// Postcondition: Node of the binary search tree are deleted
+void BST::destroy(Node *r)
+{
+    if(r!=NULL)                                 // While leafs are not reached
+    {
+        destroy(r->left);                       // call recursively of left subtree
+        destroy(r->right);                      // call recursively of right subtree    
+        delete r;                               // delete node
+    }
+}
+// A Function that Re-initializes an existing list to be empty.
+// Precondition: A binary search tree object
+// Postcondition: A helper function is called to recursively delete nodes of the binary search tree
+void BST::reinitialize()
+{
+    destroy(root);                             // Delete tree
+    root=NULL;                                 // Make root points to null
+}
+// A function that calls a recursive function to insert an element into the tree
+// Precondition: An integer element
+// Postcondition: A helper function is called to recursively to add the element wanted
+void BST::insert(item entry)
+{
+    help_insert(root,entry);                  // Call recursive function 
+}
+// A function that adds an element to the tree recursively
+// Precondition: A Root node and integer element
+// Postcondition: Element is inserted into the tree
+void BST::help_insert(Node* &t,item entry)
+{
+    if(present(entry))                      // If element is already found in tree do not add it
+        return;
+    if(t==NULL)                             // base case
+    {
+        // Make a node with data and NULL pointers
+        t=new Node;
+        t->data=entry;
+        t->left=NULL;
+        t->right=NULL;
+    }
+    else if(entry<t->data)                 // if true call recursively on the left subtree to add an element correctly
+        help_insert(t->left,entry);
+    else                                   // else true call recursively on the right subtree to add an element correctly
+        help_insert(t->right,entry);
+}
+// A function that calls a recursive function to remove an element from the tree
+// Precondition: An integer element
+// Postcondition: A helper function is called to recursively to remove the element wanted
+void BST::remove (item target )
+{
+    help_remove(root,target);               // Call recursive function 
+}
+// A function that finds the target element to be removed and calls another recursive function to remove it
+// Precondition: A root of tree and integer element
+// Postcondition: Position of target element is found then a is removed by another recursive function
+void BST::help_remove ( Node* &t,item target )
+{
+    if(!present(target))                    // If not found skip remove
+        return;
+    if ( t->data == target )                // target found
+      remove_node (t);                      // remove element
+    else if ( target < t->data )            
+      help_remove ( t->left, target );      // search for target in left subtree
+    else                            
+      help_remove ( t->right, target );     // search for target in right subtree
+}
+// A function that remove target element and adjust the tree as needed 
+// Precondition: Pointer to target element
+// Postcondition: Target element is removed, and tree is adjusted to maintain its property
+void BST::remove_node ( Node* &t )
+{
+    Node* ptr;
+    Node* back;
+    if ( t->left == NULL && t->right == NULL )  // leaf
+    {
+      delete t;
+      t = NULL;
+    }
+    else if ( t->left == NULL )                 // has right child only
+    {
+      ptr = t;
+      t = t->right;
+      delete ptr;
+    }
+    else if ( t->right == NULL )                // has left child only
+    {
+      ptr = t;
+      t = t->left;
+      delete ptr;
+    }
+    else  // has both children; copy from, then remove
+          // the leftmost node in the right subtree.
+    {
+      back = t;
+      ptr = t->right;
+      while ( ptr->left != NULL )
+      {
+        back = ptr;
+        ptr = ptr->left;
+      }
+      t->data = ptr->data;              // copy
+      if ( back == t )
+        remove_node ( back->right );   // subtree has one node
+      else
+        remove_node ( back->left );    // target node's subtree has >= nodes in its left branch
+    }
+}
+// A function that calls a recursive function to find length of tree
+// Precondition: A tree object
+// Postcondition: A helper function is called to recursively compute length of tree
+int BST::length()
+{
+    return find_length(root);
+}
+// A function that recursively computes the length of a tree
+// Precondition: A tree root
+// Postcondition: length of tree is returned
+int BST::find_length(Node *r)
+{
+    if(r==NULL)                     // base case
+        return 0;
+    else
+        return find_length(r->left)+1+find_length(r->right);        // count
+}
+// A function that checks if an inputted element is found in tree already
+// Precondition: An integer element
+// Postcondition: true or false is returned based on the presence of the element
+bool BST::present(item target)
+{
+    Node *p;
+    p=root;
+    while(true)
+    {
+        if(p==NULL)
+            return false;                   // not found
+        else if(target<p->data)
+            p=p->left;                      // go left subtree
+        else if(target==p->data)
+            return true;                    // found
+        else
+            p=p->right;                    // go right subtree
+    }
+}
+// A function that calls a recursive function to print tree content
+// Precondition: output stream and tree object
+// Postcondition: A helper function is called to recursively to print the content of tree
+ostream& operator << ( ostream& out_s, BST &t )
+{
+    t.help_print( out_s, t.root );          // helper function
+    return out_s;                           
+}
+// A function that prints tree content
+// Precondition: root of tree and output stream
+// Postcondition: tree content is outputted
+void BST::help_print ( std::ostream& out_s, Node *t ) 
+{
+    if ( t != NULL )                        // while not done
+    {
+      help_print ( out_s, t->left );        // left subtree
+      out_s << t->data << ' ';              // print element
+      help_print ( out_s, t->right );       // right subtree
+    }
+}
+// A function that prints program menu
+// Postcondition: menu is printed 
+void menu()
+{
+    cout<<"This program responds to commands the user enters to "<<'\n'<<
+            "manipulate an ordered list of integers, which is "<<'\n'<<
+            "initially empty. In the following commands, v is an "<<'\n'<<
+            "integer."<<endl;
+    cout<<endl<<endl;
+    cout<<"e -- Re-initialize the list to be empty."<<'\n'<<
+    "i v -- Insert the value v into the list."<<'\n'<<
+    "r v -- Remove the value v from the list."<<'\n'<<
+    "l -- Report the length of the list."<<'\n'<<
+    "p v -- Is the value v present in the list?"<<'\n'<<
+    "w -- Write out the list."<<'\n'<<
+    "h -- See this menu."<<'\n'<<
+    "q -- Quit."<<endl;
+}
+int main()
+{
+    BST b;
+    char letter;
+    int num;
+    menu();
+    while(true)                         // until quit
+    {
+        cin>>letter;                    // read letter 
+        if(letter=='e')                 
+            b.reinitialize();           // empty tree
+        else if(letter=='i')
+        {
+            cin>>num;                   // read number
+            b.insert(num);              // insert number
+        }
+        else if(letter=='r')
+        {
+            cin>>num;                   // read number
+            b.remove(num);              // remove number
+        }
+        else if(letter=='l')            
+            cout<<"The list contains "<<b.length()<<" values"<<endl;    // print length
+        else if(letter=='p')
+        {
+            cin>>num;
+            if(b.present(num))
+                cout<<"The value "<<num<<" is present in the list"<<endl;       // found
+            else
+                cout<<"The value "<<num<<" is NOT present in the list"<<endl;   // not found
+        }       
+        else if(letter=='w')
+            cout<<"The List: "<<b<<endl;    // print the tree content
+        else if(letter=='h')
+        {
+            menu();                     // print menu
+            continue;                   // and keep reading letters and numbers
+        }
+        else if(letter=='q')            
+            break;                      // Quit
+
+    }  
+}
+
