@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class employee
+{   
+    private: // putting name and salary in private
+        string name;
+        float salary;
+      
+    public:
+        employee();
+        employee(string, float);
+        string getname();
+        float getsalary();
+        void displayinfo();
+        float newsalary(float, float);
+        void setsalary(float);
+        void setname(string);
+};
+  // defining fuctions
+employee::employee(){
+    name="?";
+    salary=0;
+}
+  
+employee::employee(string n, float s){
+    name=n;
+    salary=s;
+}
+  
+string employee::getname(){
+    return name;
+}
+
+void employee::setname(string s){
+    name = s;
+}
+void employee::setsalary(float s){
+    salary=s;
+}
+float employee::getsalary(){
+    return salary;
+}
+  
+void employee::displayinfo(){
+    cout<<"Name is" << name<<"  "  << "Salary is" << salary<<endl;
+}
+  
+float employee::newsalary(float s, float r){
+    if (r>=0)
+        s= s + s*r;
+    else
+        cout << "Wrong raise value?"<< endl;
+    return s;
+}
+  
+int main(){
+  
+    employee emp[2];
+    emp[0].setname("x");
+    emp[0].setsalary(4500);
+    emp[1].setname("y");
+    emp[1].setsalary(7000);
+    for(int i=0; i<2;i++)
+    emp[i].displayinfo();
+    float rai;
+    cout<<"Enter the raise in percentage"<<endl;
+    cin>>rai;
+  
+    for(int a=0; a<2;a++){
+        cout<< "Salary after increment" << emp[a].newsalary(emp[a].getsalary(),rai) <<endl;
+    }
+  
+  
+return 0;
+}
+
