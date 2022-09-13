@@ -1,0 +1,251 @@
+// This is a project from my csci 301 class. In this project we are asked to design, implement, document, and test the the 9x9  matrix of The
+// sudoku solution. Basicall we have to check the sudokumatrix and check if it the sudoku solution or not.
+
+
+// including iostream, fstream and vector 
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+
+using namespace std;
+
+// making a funtions that read sudoku from file and store it in the sudoku vector array. This functions takes array and filename as input.
+// it stores the sudoku values from file into the vector array 
+
+void readSudokuFromFile(vector<vector<int>>& sudoku, char fileName[10]){
+    // initilize variable for filestream
+    ifstream sudokuFile(fileName);
+    
+    // declaring variables
+    int number, i=0, j=0;
+    
+    // reading from file
+    if (sudokuFile.is_open()) {
+        for (int i = 0; i < 9; i++) 
+        {
+            std::vector<int> row;
+            for (int j = 0; j < 9; j++) 
+            {
+                int n;
+                // input integer and ignore spaces.
+                sudokuFile >> n; sudokuFile.ignore();
+                row.push_back(n);
+            }
+            // push the row into sudoku.
+            sudoku.push_back(row);
+        }
+    }
+}
+
+// This function validates and takes vector grid as input and if the grid is valid sudoku it returns true else returns false
+
+bool Valid(vector<vector<int>>& grid)
+{
+    // initialy setting it as true
+    bool status = true;
+    
+     // Looping it to check whether all number are in the right cloumns and rows
+   
+    for (int i = 0; i < 9; ++i)
+    {
+        // variable to store the respective values of rows and cols.
+        vector<bool> row_values(9, false);
+        vector<bool> col_values(9, false);
+        vector<bool> subgrid_values(9, false);
+
+        // verifying  rows
+        for (int r = 0; r < 9; ++r)
+        {
+            if (row_values[grid[r][i] - 1] == false)
+            {
+                row_values[grid[r][i] - 1] = true;
+            }
+           
+            else
+            {
+                status = false;
+                return status;
+            }
+        }
+        
+        // verifying  columns
+        for (int c = 0; c < 9; ++c)
+        {
+            if (col_values[grid[i][c] - 1] == false)
+            {
+                col_values[grid[i][c] - 1] = true;
+            }
+            
+            else
+            {
+                status = false;
+                return status;
+            }
+        }
+        
+        // verifying sub row and column
+        if (i == 0)
+        {
+            for (int r_sub = i; r_sub < i+3; ++r_sub)
+            {
+                for (int c_sub = i; c_sub < i+3; ++c_sub)
+                {
+                    if (subgrid_values[grid[r_sub][c_sub] - 1] == false)
+                    {
+                        subgrid_values[grid[r_sub][c_sub] - 1] = true;
+                    }
+                    
+                    else
+                    {
+                        status = false;
+                        return status;
+                    }
+                }
+            }
+        }
+        // check subgrid
+        else if (i % 3 == 0)
+        {
+            // loop through the sudoku and fill the subgrid.
+            for (int r_sub = i; r_sub < i+3; ++r_sub)
+            {
+                for(int c_sub = 0; c_sub < 3; ++c_sub)
+                {
+                    if (subgrid_values[grid[r_sub][c_sub] - 1] == false)
+                    {
+                        subgrid_values[grid[r_sub][c_sub] - 1] = true;
+                    }
+                    
+                    
+                    
+                    
+                    else
+                    {
+                        status = false;
+                        return status;
+                    }
+                }
+            }
+            // fill the subgrid values with the values of grid and check if all 1-9 exist or not
+            fill(subgrid_values.begin(), subgrid_values.end(), false);
+            // loop through the sudoku and fill the subgrid.
+            for (int r_sub = 0; r_sub < 3; ++r_sub)
+            {
+                for(int c_sub = i; c_sub < i+3; ++c_sub)
+                {
+                    if (subgrid_values[grid[r_sub][c_sub] - 1] == false)
+                    {
+                        subgrid_values[grid[r_sub][c_sub] - 1] = true;
+                    }
+                    
+                    else
+                    {
+                        status = false;
+                        return status;
+                    }
+                }
+            }
+            // fill the subgrid values with the values of grid and verify if all 1-9 exist or not
+            fill(subgrid_values.begin(), subgrid_values.end(), false);
+
+            if (i == 6)
+            {
+                // loop through the sudoku and fill the subgrid.
+                for (int r_sub = i; r_sub < i+3; ++r_sub)
+                {
+                    for(int c_sub = 3; c_sub < 6; ++c_sub)
+                    {
+                        if (subgrid_values[grid[r_sub][c_sub] - 1] == false)
+                        {
+                            subgrid_values[grid[r_sub][c_sub] - 1] = true;
+                        }
+                        else
+                        {
+                            status = false;
+                            return status;
+                        }
+                    }
+                }
+                // fill the subgrid values with the values of grid and check if all 1-9 exist or not
+                fill(subgrid_values.begin(), subgrid_values.end(), false);
+                // loop through the sudoku and fill the subgrid.
+                for (int r_sub = 3; r_sub < 6; ++r_sub)
+                {
+                    for(int c_sub = i; c_sub < i+3; ++c_sub)
+                    {
+                        if (subgrid_values[grid[r_sub][c_sub] - 1] == false)
+                        {
+                            subgrid_values[grid[r_sub][c_sub] - 1] = true;
+                        }
+                        // all numbers does not exist in the given sub row so invalid sudoku
+                        else
+                        {
+                            status = false;
+                            return status;
+                        }
+                    }
+                }
+            }
+            // fill the subgrid values with the values of grid and check if all 1-9 exist or not
+            fill(subgrid_values.begin(), subgrid_values.end(), false);
+            // loop through the sudoku and fill the subgrid.
+            for (int r_sub = i; r_sub < i+3; ++r_sub)
+            {
+                for (int c_sub = i; c_sub < i+3; ++c_sub)
+                {
+                    if (subgrid_values[grid[r_sub][c_sub] - 1] == false)
+                    {
+                        subgrid_values[grid[r_sub][c_sub] - 1] = true;
+                    }
+                    // all numbers does not exist in the given sub row so invalid sudoku
+                    else
+                    {
+                        status = false;
+                        return status;
+                    }
+                }
+            }
+        }
+    }
+    return status;  
+}
+
+// program that prints the content of sudoku grid.
+void displaySudoku(vector<vector<int>>& sudoku){
+    cout << "The matrix : \n";
+    // loop throgh the sudoku grid and print all values with space inbetween
+    for(int i=0; i<9;i++){
+        for(int j=0; j<9;j++){
+            cout << sudoku[i][j] << " ";
+        }
+        // print new line.
+        cout << endl;
+    }
+}
+
+int main()
+{
+    // declare variables to store sudoku grid.
+    vector< vector<int> > sudoku_grid;
+    // declare variable to store file name.
+    char fileName[10];
+    cout << "Enter file name : ";
+    // input file name.
+    cin >> fileName;
+    
+    // get sudoku from file 
+    readSudokuFromFile(sudoku_grid,fileName);
+    // display the grid.
+    displaySudoku(sudoku_grid);
+    
+    // call out function to find if sudoku is valid.
+    bool isSolution = Valid(sudoku_grid);
+    
+    // print the solution.
+    if(isSolution)
+        cout << "is a solution.";
+    else
+        cout << "is NOT a solution.";
+    return 0;
+}
