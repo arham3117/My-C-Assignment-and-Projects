@@ -1,0 +1,63 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+//This recursive function checks if a string of characters is a Palindrome
+
+//Preconditions: An array of characters without non letters, starting point of the array which is "0" and the length of the array which is high1.
+//Postconditions: The function returns true or false which represents if the sentence is a Palindrome or not.
+bool isPalindrome(char str_array[], int low, int high)
+{
+ 
+ if(high<0) //Base case: if the user entered nothing or a non letter character
+ return false; 
+ 
+ if (low >= high) //Base case: if the function went through all the elements of the array
+ return true;
+ 
+ else
+ {
+ if(str_array[low] != str_array[high]) // return false if the start element of array is not equal to the last element of the array
+ return false; 
+ }
+ 
+return isPalindrome(str_array, low + 1, high - 1); //Recursive call to check other elements
+}
+//Main function
+int main()
+{
+ const int max_str = 1024; //declare max length of array
+ int size = 0; 
+ char ch; 
+ char input2[max_str] = {}; //declare characters array
+ cout<<"Enter a line that might be a palindrome:"<<endl;
+ cin.get(input2, max_str); //get user input as an array of characters
+ 
+ for (int i = 0; i < max_str; i++) { // A loop to make all letters upper case
+
+ch = toupper(input2[i]);
+ input2[i]=ch;
+ 
+ }
+ size = strlen(input2); //get size of the array 
+ 
+ for(int i = 0; i < size; i++){ //A loop to remove all non-letters from the array 
+ if(!isalpha(input2[i])) //checks if the array element is not a letter
+ { 
+ for(int j=i;j<size;j++) //nested loop to shift elements to remove the non-letter elements
+ { 
+ input2[j]=input2[j+1]; //shift elements
+ }
+ size--; //decrease size of array
+ i--; //decrease the i to accommodate if the user string has a punctuation followed by a space for example
+ } 
+ } 
+ if (isPalindrome(input2, 0, size-1)) //call recursive function 
+ {
+ cout <<"The string is a palindrome."<<endl; //if return value is true then string is palindrome
+ }
+ else
+ {
+ cout <<"The string is NOT a palindrome."<<endl; //else inform the user that it is not a palindrome
+ }
+}
+
