@@ -1,0 +1,35 @@
+#include <iostream>
+#include<string>
+using namespace std;
+
+// constructing a data type that stores title author publisher and cost of the Book
+struct BookRec
+{
+string title;
+string author;
+string publisher;
+float cost;
+};
+
+
+int main()
+{
+BookRec myBook[5];
+for(int i=0;i<5;i++)
+{
+cout<<"Enter book title "<<(i+1)<<":";
+cin>>myBook[i].title;
+cout<<"Enter book author "<<(i+1)<<":";
+cin>>myBook[i].author;
+cout<<"Enter publisher "<<(i+1)<<":";
+cin>>myBook[i].publisher;
+cout<<"Enter cost of book "<<(i+1)<<":";
+cin>>myBook[i].cost;
+}
+cout<<endl<<"Book Title"<<"\t"<<"Book Author"<<"\t"<<"Book Publisher"<<"\t"<<"Cost"<<endl;
+for(int i=0;i<5;i++)
+{
+cout<<myBook[i].title<<"\t\t"<<myBook[i].author<<"\t\t"<<myBook[i].publisher<<"\t\t"<<myBook[i].cost<<endl;
+}
+return 0;
+}
