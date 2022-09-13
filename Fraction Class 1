@@ -1,0 +1,124 @@
+***************************   Fraction.h       **************************************
+
+#include <iostream>
+#ifndef FRACTION_H
+#define FRACTION_H
+using namespace std;
+
+// Defining fraction class
+
+class Fraction{
+    
+        /* using private access specifier  */  
+    private:  
+        
+        /* setting attributes*/
+        int numerator;
+        /* setting attributes*/
+        int denominator;
+    
+    
+    /* using public access specifier*/
+    public:   
+      
+        /* creating a constructor */
+        Fraction();
+        //
+        Fraction(int a , int b);
+        /* using public set method for numerator*/
+        void setNumerator(int a);
+        /* using public set method for denominator*/
+        void setDenominator(int b); 
+        /* using public get method for numerator*/
+        int getNumerator();  
+        /* using public get method for denominator*/
+        int getDenominator(); 
+        /* function or method to display output*/
+        void DisplayFraction();      
+        
+        
+     
+};
+#endif 
+
+
+
+
+
+
+*********************     Fraction.cpp   *****************************
+
+
+#include "fraction.h"
+
+// Defining constructor
+Fraction::Fraction()
+{
+    numerator = 1;
+    denominator = 1;
+}
+
+Fraction::Fraction(int a, int b)
+{
+    numerator = a;
+    denominator = b;
+}
+// Defining setNumerator function using the scope resolution operator
+void Fraction::setNumerator(int a)
+{
+    numerator = a;
+}
+// Defining setDenominator function using the scope resolution operator
+void Fraction::setDenominator(int b)
+{
+    denominator = b;   
+}
+// Defining getNumerator function using the scope resolution operator
+int Fraction::getNumerator()
+{
+    return numerator;
+}
+// Defining getDenominator function using the scope resolution operator
+int Fraction::getDenominator()
+{
+    return denominator;
+}
+// Defining DisplayFraction function using the scope resolution operator
+void Fraction::DisplayFraction()
+{
+    cout<< numerator << " / " << denominator<< endl;
+}
+
+*****************************   task.cpp ********************************
+
+#include "fraction.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+    
+    
+    int a;
+    int b;
+    // Asking user to under the values of the first fraction: numerator and denominator
+    cout<< "Enter the first fraction: numerator denominator: " <<endl;
+    cin >> a >> b;
+    Fraction frac1(a,b);
+    
+    Fraction frac2;
+    // Asking user to under the values of the second fraction: numerator and denominator
+    cout<< "Enter the second fraction: numerator denominator: "<<endl;
+    cin >> a >> b;
+    frac2.setNumerator(a);
+    frac2.setDenominator(b);
+    
+    cout<< "The two fractions entered are: " <<endl;
+    
+    cout<< "\n f1 =";
+    frac1.DisplayFraction();
+    
+    cout<< "\n f2 =";
+    cout<<frac2.getNumerator()<<" / " << frac2.getDenominator()<< endl;
+    
+
+}
