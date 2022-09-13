@@ -1,0 +1,61 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int Ans1, Ans2, Ans3, Ans4, Ans5, Birthday;
+    
+    cout <<"Welcome to the Bithday Game"<< endl;                       // greating the user
+    cout <<"Are you guys ready for the MAGIC"<< endl;                  // asking if he is ready for the magic game
+    cout << "You are about to see 5 sets find your birthday day and answer accordingly"<< endl;  // telling what he is going to see
+    
+    cout << "Is your birthday in Set 1?"<< endl;                       // asking the user if their birthday is in set 1 
+    
+    cout <<"1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31"<< endl;        // displaying the numbers of set 1
+    cout <<"For YES answer 1 and for NO answer 0"<<endl;               // giving intruction to the user how to say yes or no
+    cin  >>Ans1;                                                       // taking input from user
+    
+    
+    cout << "Is your birthday in Set 2?" << endl;                      // asking the user if theri birthday is in set 2
+    
+    cout << "2,3,6,7,10,11,14,15,18,19,22,23,26,27,30,31"<<endl;       // displaying the numbers of set 2
+    cout <<"For YES answer 1 and for NO answer 0"<<endl;               // giving instructions to the user how to say yes or no
+    cin  >> Ans2;                                                      // taking input from user
+    
+    
+    cout << "Is your birthday in Set 3?"<< endl;                       // asking the user if theri birthday is in set 3
+    
+   
+    cout << "4,5,6,7,12,13,14,15,20,21,22,23,28,29,30,31" <<endl;     // displaying the numbers of set 2
+    cout << "For YES answer 1 and for NO answer 0"<< endl;            // giving instructions to the user how to say yes or no
+    cin  >> Ans3;                                                     // taking input from user
+     
+    
+    cout <<"Is your birthday in set 4"<< endl;                       // asking the user if theri birthday is in set 4
+    
+    
+    cout <<"8,9,10,11,12,13,14,15,24,25,26,27,28,29,30,31"<<endl;    // displaying the numbers of set 2
+    cout <<"For YES answer 1 and for NO answer 0"<<endl;             // giving instructions to the user how to say yes or no
+    cin  >> Ans4;                                                    // taking input from user
+    
+    
+    cout << "Is your birthday in Set 5?"<< endl;                     // asking the user if theri birthday is in set 5
+    
+    
+    cout << "16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31"<<endl;  // displaying the numbers of set 2
+    cout <<"For YES answer 1 and for NO answer 0"<<endl;              // giving instructions to the user how to say yes or no
+    cin  >> Ans5;                                                     // taking input from user
+    
+    
+    Ans1 = Ans1 * 1;                                            // putting values of Ans on the basis on user's imput
+    Ans2 = Ans2 * 2;
+    Ans3 = Ans3 * 4;
+    Ans4 = Ans4 * 8;
+    Ans5 = Ans5 * 16;
+    
+    Birthday = Ans1 + Ans2 + Ans3 + Ans4 + Ans5;                    // calculating the day on the basis of user's input
+    
+    cout << "Your birthday is :" << Birthday << endl;
+    return 0;
+}
