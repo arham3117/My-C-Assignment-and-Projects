@@ -1,0 +1,145 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    float status,income,tax;
+    
+    cout<<"Single filers is 0 " << endl;
+    cout<<"Married filling jointly or qualifying widow/widower is 1" << endl;
+    cout<<"Married filling seperately is 2 " <<endl;
+    cout<<"Head of household is 3" <<endl; // discribtion about status
+    cout<<endl<<"please enter Status : "; // asking user status
+    cin>>status; // input status
+    cout<<endl<<"please enter Amount : ";  // asking user amount
+    cin>>income; // input amount
+    if (status == 0) // case of the single filer
+    {
+        if(income <= 6000) // caculation of the money in case
+        {
+            tax = income*0.1 ;
+        }
+        else if(income <= 27950)// caculation of the money in case
+        {
+            tax = 6000*0.1 + (income-6000)*0.15 ;
+        }
+        else if(income <= 67700)// caculation of the money in case
+        {
+            tax = 6000*0.1 + 21950*0.15 + (income-27950)*0.27;
+        }
+        else if(income <= 141250)// caculation of the money in case
+        {
+            tax = 6000*0.1 + 21950*0.15 + (67700-27950)*0.27 + (income-67700)*0.3 ;
+        }
+        else if(income <= 307,050)// caculation of the money in case
+        
+            tax = 6000*0.1 + 21950*0.15 + (67700-27950)*0.27 + (14250-67700)*0.3 + (income-141250)*0.35;
+        
+        else// caculation of the money in case
+        {
+            tax = 6000*0.1 + 21950*0.15 + (67700-27950)*0.27 + (141250-67700)*0.3 + (307050-141250)*0.35 + (income-307050)*0.386;
+        }
+    }
+    if(status==1)// case of the Married filling jointly or qualifying widow/widower
+    {
+        if(income <=12000)// caculation of the money in case
+        {
+            tax = income*0.1 ;
+        }
+        else if(income <=46700)// caculation of the money in case
+        {
+            tax = 12000*0.1 + (income-12000)*0.15 ;
+        }
+        else if(income <=112850)// caculation of the money in case
+        {
+            tax = 12000*0.1 + (46700-12000)*0.15 + (income-46700)
+            *0.27 ;
+        }
+        else if(income <=171950)// caculation of the money in case
+        {
+            tax = 12000*0.1 + (46700-12000)*0.15 + (112850-46700)
+            *0.27 + (income - 112850)*0.3 ;
+        }
+        else if(income <=307050)// caculation of the money in case
+        {
+            tax = 12000*0.1 + (46700-12000)*0.15 + (112850-46700)
+            *0.27 + (171950 - 112850)*0.3 + (income-171950)*0.35 ;
+        }
+        else// caculation of the money in case
+        {
+            tax = 12000*0.1 + (46700-12000)*0.15 + (112850-46700)
+            *0.27 + (171950 - 112850)*0.3 + (307050-171950)*0.35
+            +(income - 307050)*0.386 ;
+        }
+    }
+    if(status == 2)//case of the Married filling seperately is 2
+    {
+        if(income <= 6000)// caculation of the money in case
+        {
+            tax = income * 0.1;
+        }
+        else if(income <= 23350)// caculation of the money in case
+        {
+            tax = 6000*0.1 + (income - 6000)*0.15;
+        }
+        else if(income <= 56425)// caculation of the money in case
+        {
+            tax = 6000*0.1 + (23350 - 6000)*0.15
+            + (income - 23350)*0.27;
+        }
+        else if(income <= 85975)// caculation of the money in case
+        {
+            tax = 6000*0.1 + (23350 - 6000)*0.15
+            + (56425 - 23350)*0.30 + (income - 56425)*0.35;
+        }
+        else if(income <= 153525)// caculation of the money in case
+        {
+            tax = 6000*0.1 + (23350 - 6000)*0.15
+            + (56425 - 23350)*0.30 + (85975 - 56425)*0.35
+            + (income - 85975)*0.35;
+        }
+        else// caculation of the money in case
+        {
+            tax = 6000*0.1 + (23350 - 6000)*0.15
+            + (56425 - 23350)*0.30 + (85975 - 56425)*0.35
+            + (153525 - 85975)*0.35 + (income - 153525)*0.386;
+        }
+    }
+    if(status==3) // case of the  Head of household
+    {
+        if(income <= 10000)// caculation of the money in case
+        {
+            tax = income*0.1;
+        }
+        else if(income<=37450)// caculation of the money in case
+        {
+            tax = 6000*0.1 + (income - 6000)*0.15 ;
+        }
+         else if(income<=96700)// caculation of the money in case
+        {
+            tax = 6000*0.1 + (37450- 6000)*0.15 
+            +(income - 37450)*0.27 ;
+        }
+         else if(income<=156600)// caculation of the money in case
+        {
+            tax =6000*0.1 + (37450- 6000)*0.15 
+            +(96700 - 37450)*0.27 + (income - 96700)*0.3 ;
+        }
+         else if(income<=307050)// caculation of the money in case
+        {
+            tax =6000*0.1 + (37450- 6000)*0.15 
+            +(96700 - 37450)*0.27 + (156600 - 96700)*0.3
+            +(income - 156600)*0.35;
+        }
+         else// caculation of the money in case
+        {
+            tax = 6000*0.1 + (37450- 6000)*0.15 
+            +(96700 - 37450)*0.27 + (156600 - 96700)*0.3
+            +(307050 - 156600)*0.35 + (income-307050)*0.386;
+        }
+    }
+    cout<<endl<<"The amount of tax is "<<tax ; // printing tax
+    return 0;
+}
+
