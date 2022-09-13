@@ -1,0 +1,88 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    
+  int pennies, nickels, dimes, quarters;
+  float x;
+  void initialize(int&, int&, int&, int&);
+  void insert(int&, int&, int&, int&);
+  void Remove(int&, int&, int&, int&);
+  float dollars(int, int, int, int);
+  void print(int, int, int, int, float);
+  initialize(pennies, nickels, dimes, quarters);
+
+  x = dollars(pennies, nickels, dimes, quarters);
+  print(pennies, nickels, dimes, quarters, x);
+  insert(pennies, nickels, dimes, quarters);
+
+  x = dollars(pennies, nickels, dimes, quarters);
+  print(pennies, nickels, dimes, quarters, x);
+  Remove(pennies, nickels, dimes, quarters);
+
+  x = dollars(pennies, nickels, dimes, quarters);
+  
+print(pennies, nickels, dimes, quarters, x);
+ }
+
+void initialize(int& pennies, int& nickels, int& dimes, int& quarters)
+
+
+{
+pennies=0;
+nickels=0;
+dimes=0;
+quarters=0;
+}
+
+void insert(int& pennies, int& nickels, int& dimes, int& quarters)
+
+
+{
+int p, n, d, q;
+
+cout << "insert: ";
+cin >>p>>n>>d>>q;
+
+pennies = pennies + p;
+nickels = nickels + n;
+dimes = dimes + d;
+quarters = quarters + q;
+}
+
+
+void Remove(int& pennies, int& nickels, int& dimes, int& quarters)
+
+{
+int p, n, d, q;
+
+cout << "Remove: ";
+cin >>p>>n>>d>>q;
+
+pennies  = pennies - p;
+nickels  = nickels - n;
+dimes    = dimes - d;
+quarters = quarters - q;
+
+}
+
+float dollars(int pennies,  int nickels, int dimes, int quarters)
+{
+
+ float x;
+
+ x = pennies + 5*nickels + 10*dimes + 25*quarters;
+ x = (float)x/100;
+
+return x;
+}
+
+void print(int pennies, int nickels, int dimes, int quarters, float x)
+{
+cout <<quarters <<" quarters + " <<dimes <<" dimes + " <<nickels <<" nickels + "
+<<pennies <<" pennies = $" <<x <<"\n";
+}
+
+
