@@ -1,0 +1,106 @@
+#include <iostream>
+
+using namespace std;
+
+    class TV
+{ 
+    public:
+        
+        int VolumeLevel;
+        int Channel;
+        bool On;
+        
+        TV()
+        {
+            Channel=1;
+            VolumeLevel=1;
+            On=false;
+        }    
+        
+        
+        void TurnOn();
+        void Turnoff();
+        void SetChannel (int);
+        void SetVolume (int);
+        void ChannelUp ();
+        void ChannelDown ();
+        void VolumeUp ();
+        void VolumeDown ();
+        
+};
+    void TV::TurnOn()
+{
+    On = true;
+    
+}
+
+    void TV::Turnoff()
+{    
+    On = false;
+}   
+   
+    void TV::SetChannel (int Newchannel)
+{
+    if(On && Newchannel >=1 && Newchannel<=120)
+    Channel = Newchannel;
+    
+}
+      
+    void TV::ChannelUp()
+{
+    if(On && Channel<120)
+    Channel++;
+
+}    
+    void TV::ChannelDown()
+{
+    if(On && Channel>1)
+    Channel--;
+}    
+    void TV::SetVolume (int NewVolume)
+{
+    if(On && NewVolume >=1 && NewVolume <=7)
+    VolumeLevel = NewVolume;
+
+}    
+       
+    
+    void TV::VolumeUp()
+{
+    if (On && VolumeLevel <7)
+    VolumeLevel++;
+    
+}   
+    void TV::VolumeDown()
+{
+    if (On && VolumeLevel >1)
+    VolumeLevel--;
+    
+}   
+
+    
+
+    int main()
+{
+    TV tv1;
+    
+    tv1.TurnOn();
+    tv1.SetChannel(24);
+    tv1.SetVolume(3);
+    
+    
+    TV tv2;
+    
+    tv2.TurnOn();
+    tv2.ChannelUp();
+    tv2.VolumeUp();
+    
+    
+    cout << "tv1's channel is " << tv1.Channel  << " and volume is " << tv1.VolumeLevel << endl;
+    
+    cout << "tv2's channel is " << tv2.Channel  << " and volume is " << tv2.VolumeLevel <<endl;
+    
+
+    return 0;
+}
+
