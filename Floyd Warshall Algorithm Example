@@ -1,0 +1,107 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+//floyd warshall algrithm to find the shortest path between any two nodes in the graph
+//D -> to store shortest distance between different pair of vertices
+//P -> Keep track of the previous node traversed before reaching to that node. (to identify the shortest path between any pair of nodes).
+//i.e. before from i to j there will be intermediate path between i to P[i][j] and then P[i][j] to j
+//and it is recursiverly called like previous i,j if P[i][j] is not zero
+//i.e. i is i and  j becomes P[i][j] for first part
+//and i becomes P[i][j] and j is j for second part so on.
+
+void floydWarshal(int **D,int **P,int n){
+  //for each iteration k
+  for(int k=0; k<n; k++){
+    for(int i=0; i<n; i++){
+      for(int j=0; j<n; j++){
+        if(D[i][j]>(D[i][k]+D[k][j])){
+          D[i][j]=D[i][k]+D[k][j];
+          P[i][j]=k+1;
+        }
+      }
+    }
+  }
+}
+
+//this is the recursive path finding algorithm
+void Path(int **P,int q,int r){
+  if(P[q][r]!=0){
+    Path(P,q,P[q][r]-1);
+    cout<<P[q][r]<<" ";
+    Path(P,P[q][r]-1,r);
+  }
+}
+
+void getPath(int **P,int i,int j){
+  cout<<i+1<<" ";
+  Path(P,i,j);
+  cout<<j+1;
+}
+
+int main() {
+  //file name variable
+  string filename;
+  cout<<"Enter input file name: ";
+  cin>>filename;  
+  //creating a input fstream
+  ifstream f(filename);
+  //if file not found then exit
+  if(!f){
+    cout<<"File not found!";
+    return 0;
+  }
+  //getting the first line integers i.e. the size of the matrix
+  int n;
+  f>>n;
+  //creating the Distance matrix using pointers
+  //allocating memory to 2D array (matrix)
+  //to store shortest distance from any node to any other node
+  int **D = new int*[n];
+  for(int i=0; i<n; i++){
+    D[i] = new int[n];
+  }
+
+  //creating another 2D array to keep track of the path of the vertices (to identify the path from one vertex to another recursively)
+  int **P=new int*[n];
+  for(int i=0; i<n; i++){
+    P[i]=new int[n];
+  }
+  //taking matrix input from the file D and assigning zero to all elements in P (initialization)
+  for(int i=0; i<n; i++){
+    for(int j=0; j<n; j++){
+      f>>D[i][j]; //taking 
+      P[i][j]=0;
+    }
+  }
+
+  //close the file
+  f.close();
+  //calling the floyd algrithm function and make changes to D and P in there
+  floydWarshal(D,P,n);
+  //Printing the Shortest path matrix for each vertex
+  //after applying to D
+  cout<<"\nShortest path lengths:"<<endl;
+  for(int i=0; i<n; i++){
+    for(int j=0; j<n; j++){
+      cout<<D[i][j]<<" ";
+    }
+    cout<<endl;
+  }
+
+  //User Interface to ask for shortest path between any two vertices
+  int v1,v2;
+  while(true){
+    //taking the both vertices
+    cout<<"\nEnter two vertex numbers: ";
+    cin>>v1;
+    //if entered -1 then quit
+    if(v1 == -1) break;  
+    cin>>v2;
+    cout<<"\tShortest path: ";
+    //calling the get path using P matrix to show the path between v1 and v2 
+    //taking v1-1, v2-1 because index starts from 0.
+    getPath(P,v1-1,v2-1);
+  }
+
+}
