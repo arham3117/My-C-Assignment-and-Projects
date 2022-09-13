@@ -1,0 +1,202 @@
+********************************  NewFraction.h *************************************
+
+#include <iostream>
+#ifndef NEWFRACTION1_H
+#define NEWFRACTION1_H
+using namespace std;
+// Defining fraction class
+class Fraction{
+  /* using private access specifier  */ 
+    private:
+        /* setting attributes*/
+        int numerator;
+        /* setting attributes*/
+        int denominator;
+        
+    public:
+        /* creating a constructor */
+        Fraction();
+        Fraction(int a, int b);
+         /* using public set method for numerator*/
+        void setNumerator(int a);
+         /* using public set method for denominator*/
+        void setDenominator(int b);
+        /* using public get method for numerator*/
+        int getNumerator();
+        /* using public get method for denominator*/
+        int getDenominator();
+         /* function or method to display output*/
+        void DisplayFraction();
+        void shorten();
+        
+};
+
+Fraction Sum (Fraction a, Fraction b);
+Fraction Difference (Fraction a, Fraction b);
+Fraction Product (Fraction a, Fraction b);
+Fraction Quotient (Fraction a, Fraction b);
+int GCD (int i, int j);
+
+#endif
+
+
+**************************************  NewFraction.cpp *******************************************
+
+#include "newfraction1.h"
+#include <iostream>
+#include <math.h>
+using namespace std;
+// Defining constructor
+Fraction::Fraction()
+{
+    numerator = 1;
+    denominator = 1;
+}
+
+Fraction::Fraction(int a, int b)
+{
+    numerator = a;
+    denominator = b;
+}
+// Defining setNumerator function using the scope resolution operator
+void Fraction::setNumerator(int a)
+{
+    numerator = a;
+}
+// Defining setDenominator function using the scope resolution operator
+void Fraction::setDenominator(int b)
+{
+    denominator = b;
+}
+// Defining getNumerator function using the scope resolution operator
+int Fraction::getNumerator()
+{
+    return numerator;
+}
+// Defining getDenominator function using the scope resolution operator
+int Fraction::getDenominator()
+{
+    return denominator;
+}
+// Defining DisplayFraction function using the scope resolution operator
+void Fraction::DisplayFraction()
+{
+    if(numerator>=0 && denominator>=0)
+    shorten();
+    std::cout << numerator << " / " << denominator << std::endl;
+}
+// Defining shorten function using the scope resolution operator
+void Fraction::shorten()
+{
+    int b = GCD(numerator,denominator);
+    numerator /= b;
+    denominator /= b;
+}
+
+// Defining 4  functions: Sum, Difference, Product, Quotient
+
+int GCD(int i, int j)
+{
+    
+    if(i==0)
+    return j;
+    
+    if(j==0)
+    return i;
+    
+    // base case
+    if(i==j)
+    return i;
+    
+    // i is greater
+    
+    if(i>j)
+    return GCD(i-j,j);
+    return GCD(i,j-i);
+}
+
+// Sum function
+Fraction Sum(Fraction a, Fraction b)
+{
+    int num, den;
+    num = (a.getNumerator() * b.getDenominator()) + (b.getNumerator() * a.getDenominator());
+    den = a.getDenominator() * b.getDenominator();
+    Fraction val(num,den);
+    return val;
+}
+
+// Difference function
+
+Fraction Difference(Fraction a, Fraction b)
+{
+    int num, den;
+    num = (a.getNumerator() * b.getDenominator()) - (b.getNumerator() * a.getDenominator());
+    den = a.getDenominator() * b.getDenominator();
+    Fraction val(num,den);
+    return val;
+}
+
+// Product function
+
+Fraction Product(Fraction a, Fraction b)
+{
+    int num, den;
+    num = (a.getNumerator() * b.getNumerator());
+    den =  a.getDenominator() * b.getDenominator();
+    Fraction val(num,den);
+    return val;
+}
+
+// Quotient function
+Fraction Quotient (Fraction a, Fraction b)
+{
+    int num, den;
+    
+    num = (a.getNumerator() * b.getDenominator());
+    den = a.getDenominator() * b.getNumerator();
+    Fraction val(num, den);
+    return val;
+}
+
+
+**************************************  task 2  ***************************
+
+
+#include <iostream>
+#include "newfraction1.h"
+using namespace std;
+
+int main()
+{
+    int x,y;
+    cout<<"Enter the first fraction: numerator denominator\n";
+    cin>>x>>y;
+    
+    Fraction frac1(x,y);
+    Fraction frac2;
+    
+    cout<<"Enter the Second fraction: numerator denominator\n";
+    cin>>x>>y;
+    
+    frac2.setNumerator(x);
+    frac2.setDenominator(y);
+    
+    cout<<"The two fractions entered are\n";
+    cout<<"f1 = ";
+    frac1.DisplayFraction();
+    
+    cout<<"\nf2 = ";
+    cout<<frac2.getNumerator()<<"/"<<frac2.getDenominator()<<"\n";
+    
+    cout<<"\nThe arithmetic operation on these two fractions:\n";
+    cout<<"f1 + f2 = ";Sum(frac1,frac2).DisplayFraction();
+    cout<<"\nf1 - f2 = ";Difference(frac1,frac2).DisplayFraction();
+    cout<<"\nf1 * f2 = ";Product(frac1,frac2).DisplayFraction();
+    cout<<"\nf1 / f2 = ";Quotient(frac1,frac2).DisplayFraction();
+    
+}
+
+
+
+
+
