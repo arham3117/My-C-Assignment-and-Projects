@@ -1,0 +1,95 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+     float Income, Tax,IncomeAfterTax, TaxApplied;
+  int Select;
+
+  cout << "Enter whichever applies to you." << endl;
+  cout << "1. Single\n";
+  cout << "2. Married filing jointly\n3. Married filing separately" << endl;
+  cout << "4. Head of household" << endl;
+  cout << "Enter here ==> ";
+  cin >> Select;
+  cout << "Enter your Income: ";
+  cin >> Income;
+
+  switch (Select)
+    {
+    case 1:
+      if (Income < 6000)
+	Tax = 0.1;
+      else if (Income >= 6001 && Income <= 27950)
+	Tax = 0.15;
+      else if (Income >= 27951 && Income <= 67700)
+	Tax = 0.27;
+      else if (Income >= 67701 && Income <= 141250)
+	Tax = 0.30;
+      else if (Income >= 141251 && Income <= 307050)
+	Tax = 0.35;
+      else
+	Tax = 0.386;
+
+      break;
+
+    case 2:
+      if (Income < 12000)
+	Tax = 0.1;
+      else if (Income >= 12001 && Income <= 46700)
+	Tax = 0.15;
+      else if (Income >= 46701 && Income <= 122850)
+	Tax = 0.27;
+      else if (Income >= 122851 && Income <= 171950)
+	Tax = 0.30;
+      else if (Income >= 1719501 && Income <= 307050)
+	Tax = 0.35;
+      else
+	Tax = 0.386;
+
+      break;
+
+    case 3:
+      if (Income < 6000)
+	Tax = 0.1;
+      else if (Income >= 6001 && Income <= 23350)
+	Tax = 0.15;
+      else if (Income >= 23351 && Income <= 56425)
+	Tax = 0.27;
+      else if (Income >= 56426 && Income <= 85975)
+	Tax = 0.30;
+      else if (Income >= 85976 && Income <= 153525)
+	Tax = 0.35;
+      else
+	Tax = 0.386;
+
+      break;
+
+    case 4:
+      if (Income < 10000)
+	Tax = 0.1;
+      else if (Income >= 10001 && Income <= 37450)
+	Tax = 0.15;
+      else if (Income >= 37451 && Income <= 96700)
+	Tax = 0.27;
+      else if (Income >= 96701 && Income <= 156600)
+	Tax = 0.30;
+      else if (Income >= 156601 && Income <= 307050)
+	Tax = 0.35;
+      else
+	Tax = 0.386;
+    default:
+      cout << "Error";
+    }
+
+  TaxApplied = Income * Tax;
+  IncomeAfterTax = Income - (Income * Tax);
+  cout <<"Tax amount based on your income is: $" << TaxApplied << endl;
+  cout << "Your Income after Tax is: $" << IncomeAfterTax << endl;
+
+
+
+    return 0;
+}
+
