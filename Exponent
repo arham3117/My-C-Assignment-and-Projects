@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+float power(float v, int e)
+{
+if(e==0)
+{
+return 1.00;
+}
+else
+{
+return v*power(v,e-1);
+}
+}
+
+int main()
+{
+float val;
+int exp;
+cout<<"Enter a real value: ";
+cin>>val;
+cout<<"Enter a non-negative integer exponent: ";
+cin>>exp;
+float result=power(val,exp);
+cout<<val<<" ^ "<<exp<<" = "<<result;
+return 0;
+}
+
